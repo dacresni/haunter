@@ -66,3 +66,12 @@ If you don't get out before time is up, the ghost will drag you to the sub basem
 * Find all the incriminating evidence.
 * Make it to your car.
 * Did I mention Don't Die?
+
+## Information
+
+This game is part of [Global Game Jame 2019](https://globalgamejam.org/).  This game was held at the [GGJ event in St. Louis](https://www.stlgamejam.com/), Missouri on the campus of the [University of Missouri - St. Louis](http://www.umsl.edu/).
+
+The events depecited in this story and game are purely conicidental. Although licensed under a GNU license, any part of this story that is reproduced without written consent and acknowledgement of the original authors is prohibited.
+
+The author of this story wishes to acknowledge all the hard work the veterans of the world have done to keep it safe.  **All gave some, some gave all.**
+
