@@ -198,7 +198,8 @@
     function win(){
       if (cursors.down.isDown){
         if(score>=scoreToWin){
-          this.add.text(player.x-190, player.y-175, "You escape", {color: 'Black', font:'64px Arial', backgroundColor:'White'});
+          this.add.text(player.x-190, player.y-175, "You escape!", {color: 'Black', font:'64px Arial', backgroundColor:'White'});
+          this.add.text(650,1053,"By Nehemiah Dacres, Jason Charney, Daniel Nagel, and M.K. Jones", {color: 'Black'});
           this.physics.pause();
         }
         else{
