@@ -1,19 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://laharl_sprite.png" type="Texture" id=1]
 [ext_resource path="res://player_char_behavior.gd" type="Script" id=2]
 
+[sub_resource type="World" id=1]
+
+
 [node name="WorldRoot" type="Viewport" index="0"]
 
 arvr = false
-size = Vector2( 0, 0 )
+size = Vector2( 1920, 1080 )
 own_world = false
-world = null
+world = SubResource( 1 )
 transparent_bg = false
 msaa = 0
 hdr = true
 disable_3d = false
-usage = 2
+usage = 0
 debug_draw = 0
 render_target_v_flip = false
 render_target_clear_mode = 0
@@ -28,11 +31,13 @@ shadow_atlas_quad_0 = 2
 shadow_atlas_quad_1 = 2
 shadow_atlas_quad_2 = 3
 shadow_atlas_quad_3 = 4
+_sections_unfolded = [ "Render Target", "Rendering" ]
 
 [node name="laharl_sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 87.8696, 86.7277 )
+position = Vector2( -620.417, 229.952 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+_sections_unfolded = [ "Pause" ]
 
 

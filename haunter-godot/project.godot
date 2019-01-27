@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="haunter-godot"
-run/main_scene="res://house.tscn"
+run/main_scene="res://WorldRoot.tscn"
 config/icon="res://blue_ghost.png"
 
 [logging]
