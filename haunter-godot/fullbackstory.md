@@ -1,7 +1,7 @@
 # The Tale of Mad McCork.
 written by Jason Charney
 
-> Note: This is not a full story. It is the back story. My idea is that the end of this game ends not with good triumphing over evil but good discovering evil already won, but it will be up to good people like him to outlast the evil until a time where the forces of good take control...or at least realizes their plan which never was that good to begin.  There's all sorts of politics in this, but I will hold my tounge. Enjoy the story.
+> Note: This is not a full story. It is the back story. My idea is that the end of this game ends not with good triumphing over evil but good discovering evil already won, but it will be up to good people like him to outlast the evil until a time where the forces of good take control...or at least realizes their plan which never was that good to begin.  There's all sorts of politics in this, but I will hold my tongue. Enjoy the story.
 
 England 1823, Charles Babbage is given 1700 pounds to start working on the difference engine No.1 with the industrialist Joseph Clement and mathematician Ada King, the Countess of Lovelace.  It is in this time, the Industrial Revolution was midway between the Madness of King George and the Reign of Queen Victoria.
 

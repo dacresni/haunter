@@ -1,13 +1,13 @@
 # CHANGES.md
 
-> *Everything stays,*
-> *Right where you left it.*
-> *Everything stays,*
-> *But it still changes.*
-> *Ever so slightly,*
-> *Daily and nightly,*
-> *In little ways,*
-> *When everything stays.*
+> *Everything stays,*<br>
+> *Right where you left it.*<br>
+> *Everything stays,*<br>
+> *But it still changes.*<br>
+> *Ever so slightly,*<br>
+> *Daily and nightly,*<br>
+> *In little ways,*<br>
+> *When everything stays.*<br>
 > --from "Everything Stays" by Rebecca Sugar
 
 Change is inevitable. This document should help track the changes that Git/GitHub can't express in a simple commit message.
