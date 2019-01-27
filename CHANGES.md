@@ -1,7 +1,7 @@
 # CHANGES.md
 
 > *Everything stays,*
-> *Right wher you left it.*
+> *Right where you left it.*
 > *Everything stays,*
 > *But it still changes.*
 > *Ever so slightly,*
@@ -10,7 +10,7 @@
 > *When everything stays.*
 > --from "Everything Stays" by Rebecca Sugar
 
-Change is inevidable. This document should help track the changes that Git/GitHub can't express in a simple commit message.
+Change is inevitable. This document should help track the changes that Git/GitHub can't express in a simple commit message.
 
 ## 2019.01.27 by jrcharney
 
