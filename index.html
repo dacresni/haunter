@@ -38,6 +38,7 @@
     var platforms;
     var cursors;
     var currentFloorR=1;
+    var flH=350;
 
     var game = new Phaser.Game(config);
 
@@ -55,21 +56,24 @@
 
     function create ()
     {
-        this.add.image(190, 510, 'upDoor');
-        this.add.image(800, 510, 'upDoor');
-
         doorsExit = this.physics.add.staticGroup();
-        doorsExit.create(67,510, 'DoorExit');
+        doorsExit.create(67,610, 'DoorExit');
+
+        doorsDown = this.physics.add.staticGroup();
+        doorsDown.create(700, 260, 'dnDoor');
+
+        doorsUp = this.physics.add.staticGroup();
+        doorsUp.create(700,610, 'upDoor');
 
         platforms = this.physics.add.staticGroup();
-        platforms.create(0, 600, 'Floor').setScale(2,1).refreshBody();
-        platforms.create(300, 260 , 'Floor').setScale(0.4,1).refreshBody();
+        platforms.create(0, 700, 'Floor').setScale(2,1).refreshBody();
+        platforms.create(300, 350 , 'Floor').setScale(0.4,1).refreshBody();
         //platforms.create(600, 300, 'Floor').setScale(0.2,1).refreshBody();
         //platforms.create(90, 250, 'Floor').setScale(0.2,1).refreshBody();
         //platforms.create(500, 650, 'Floor').setScale(0.2,1).refreshBody();
         //platforms.create(750, 220, 'Floor').setScale(0.2,1).refreshBody();
 
-        player = this.physics.add.sprite( 300,400, 'dude');
+        player = this.physics.add.sprite( 200,168, 'dude');
         player.setCollideWorldBounds(true);
 
         antag = this.physics.add.sprite( 900,168, 'ghost');
@@ -121,8 +125,11 @@
         this.physics.add.collider(antag, platforms);
         this.physics.add.collider(stars, platforms); // furnature collision here
 
-        this.physics.add.overlap(player, stars, collectStar, null, this);
-        this.physics.add.overlap(player, doorsExit, win, null, this); //packs things
+        this.physics.add.overlap(player, stars, collectStar, null, this);// packs things
+
+        this.physics.add.overlap(player, doorsExit, win, null, this);
+        this.physics.add.overlap(player, doorsDown, down, null, this);
+        this.physics.add.overlap(player, doorsUp, up, null, this);
 
         //Camera
         camera =this.cameras.main;
@@ -181,8 +188,24 @@
     }
 
     function win(){
-        this.add.text(200,200, "Winners Live", {color: 'Black', font:'64px Arial', backgroundColor:'White'});
+      if (cursors.down.isDown){
+        this.add.text(camera.x, camera.y+400, "Winners Live", {color: 'Black', font:'64px Arial', backgroundColor:'White'});
+      }
     }
+
+      function down(){
+        if (cursors.down.isDown){
+          player.y=player.y+350;
+          cursors.down.reset();
+        }
+    }
+
+    function up(){
+      if (cursors.down.isDown){
+        player.y=player.y-350;
+        cursors.down.reset();
+      }
+  }
 
 </script>
 
