@@ -37,6 +37,7 @@
     var stars;
     var platforms;
     var cursors;
+    var currentFloorR=1;
 
     var game = new Phaser.Game(config);
 
@@ -68,7 +69,7 @@
         //platforms.create(500, 650, 'Floor').setScale(0.2,1).refreshBody();
         //platforms.create(750, 220, 'Floor').setScale(0.2,1).refreshBody();
 
-        player = this.physics.add.sprite( 0,168, 'dude');
+        player = this.physics.add.sprite( 300,400, 'dude');
         player.setCollideWorldBounds(true);
 
         antag = this.physics.add.sprite( 900,168, 'ghost');
@@ -122,6 +123,11 @@
 
         this.physics.add.overlap(player, stars, collectStar, null, this);
         this.physics.add.overlap(player, doorsExit, win, null, this); //packs things
+
+        //Camera
+        camera =this.cameras.main;
+        camera.setSize(800,600);
+        camera.startFollow(player, true, .1, .1);
     }
 
     function update ()
@@ -166,7 +172,6 @@
         {
             player.setVelocityY(-330);
         }
-
     }
 
 
