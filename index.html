@@ -42,36 +42,38 @@
 
     function preload ()
     {
-        //this.load.image('sky', 'haunter-godot/sky.png');
+        this.load.image('upDoor', 'haunter-godot/DoorUp.png');
+        this.load.image('dnDoor', 'haunter-godot/DoorDown.png');
         this.load.image('Floor', 'haunter-godot/Floor.png');
-        //this.load.image('ground', 'haunter-godot/floor_slice.png');
         //this.load.image('star', 'haunter-godot/star.png');
         //this.load.image('bomb', 'haunter-godot/bomb.png');
         this.load.spritesheet('dude', 'haunter-godot/twowaycycle.png', { frameWidth: 66, frameHeight: 167});
-        this.load.spritesheet('ghost', 'haunter-godot/antag-1.png', { frameWidth: 63, frameHeight: 169});
+        this.load.spritesheet('ghost', 'haunter-godot/antag-1.png', { frameWidth: 65, frameHeight: 169});
         this.load.image('DoorExit', 'haunter-godot/DoorExit.png');
     }
 
     function create ()
     {
-        //this.add.image(400, 300, 'sky');
+        this.add.image(190, 510, 'upDoor');
+        this.add.image(800, 510, 'upDoor');
 
         doorsExit = this.physics.add.staticGroup();
         doorsExit.create(67,510, 'DoorExit');
 
         platforms = this.physics.add.staticGroup();
+        platforms.create(0, 600, 'Floor').setScale(2,1).refreshBody();
+        platforms.create(300, 260 , 'Floor').setScale(0.4,1).refreshBody();
+        //platforms.create(600, 300, 'Floor').setScale(0.2,1).refreshBody();
+        //platforms.create(90, 250, 'Floor').setScale(0.2,1).refreshBody();
+        //platforms.create(500, 650, 'Floor').setScale(0.2,1).refreshBody();
+        //platforms.create(750, 220, 'Floor').setScale(0.2,1).refreshBody();
 
-        platforms.create(800, 600, 'Floor')
-
-        platforms.create(600, 300, 'Floor').setScale(0.2,1).refreshBody();
-        platforms.create(90, 250, 'Floor').setScale(0.2,1).refreshBody();
-        platforms.create(500, 650, 'Floor').setScale(0.2,1).refreshBody();
-        platforms.create(750, 220, 'Floor').setScale(0.2,1).refreshBody();
-
-        player = this.physics.add.sprite( 67,168, 'dude');
-
-        player.setBounce(0.2);
+        player = this.physics.add.sprite( 0,168, 'dude');
         player.setCollideWorldBounds(true);
+
+        antag = this.physics.add.sprite( 900,168, 'ghost');
+        antag.setCollideWorldBounds(true);
+        antag.direction = 'left'
 
         this.anims.create({
             key: 'left',
@@ -94,27 +96,13 @@
         });
 
 
-        //antagonist animations     (Where is the antagonist?)
+        //antagonist animations
         this.anims.create({
-            key: 'antag-left',
-            frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 3 }),
-            frameRate: 10,
+            key: 'antag-anim',
+            frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 5 }),
+            frameRate: 5,
             repeat: -1
         });
-
-        this.anims.create({
-            key: 'antag-turn',
-            frames: [ { key: 'ghost', frame: 3 } ],
-            frameRate: 20
-        });
-
-        this.anims.create({
-            key: 'antag-right',
-            frames: this.anims.generateFrameNumbers('ghost', { start: 4, end: 6 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
 
 
         cursors = this.input.keyboard.createCursorKeys();
@@ -129,7 +117,8 @@
             child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
         });
         this.physics.add.collider(player, platforms);
-        this.physics.add.collider(stars, platforms);
+        this.physics.add.collider(antag, platforms);
+        this.physics.add.collider(stars, platforms); // furnature collision here
 
         this.physics.add.overlap(player, stars, collectStar, null, this);
         this.physics.add.overlap(player, doorsExit, win, null, this); //packs things
@@ -137,6 +126,23 @@
 
     function update ()
     {
+        //ENEMY AI
+
+        if (antag.direction == 'left')
+        {
+            antag.setVelocityX(-60);
+            antag.anims.play('antag-anim', true);
+        }
+        else if (antag.direction == 'right')
+        {
+            antag.setVelocityX(60);
+            antag.anims.play('antag-anim', true);
+
+        }
+        if (antag.x <= 60) { antag.direction = 'right'}
+        if (antag.x >= 1000) { antag.direction = 'left'}
+
+
         if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
@@ -160,6 +166,7 @@
         {
             player.setVelocityY(-330);
         }
+
     }
 
 
