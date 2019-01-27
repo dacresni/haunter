@@ -37,8 +37,9 @@
     var stars;
     var platforms;
     var cursors;
-    var currentFloorR=1;
-    var flH=350;
+    //var currentFloorR=1;
+    //var flH=350;
+    var score=0;
 
     var game = new Phaser.Game(config);
 
@@ -114,7 +115,7 @@
 
         stars = this.physics.add.group({
             key: 'star',
-            repeat: 7,
+            repeat: 4,
             setXY: { x: 12, y: 0, stepX: 70 }
         });
 
@@ -125,7 +126,7 @@
         this.physics.add.collider(antag, platforms);
         this.physics.add.collider(stars, platforms); // furnature collision here
 
-        this.physics.add.overlap(player, stars, collectStar, null, this);// packs things
+        this.physics.add.overlap(player, stars, movingBox, null, this);// packs things
 
         this.physics.add.overlap(player, doorsExit, win, null, this);
         this.physics.add.overlap(player, doorsDown, down, null, this);
@@ -182,14 +183,21 @@
     }
 
 
-    function collectStar (player, star)
+    function movingBox (player, star)
     {
         star.disableBody(true, true);
+        score=score+1;
     }
 
     function win(){
       if (cursors.down.isDown){
-        this.add.text(camera.x, camera.y+400, "Winners Live", {color: 'Black', font:'64px Arial', backgroundColor:'White'});
+        if(score>3){
+          this.add.text(camera.x, camera.y+400, "Winners Live", {color: 'Black', font:'64px Arial', backgroundColor:'White'});
+          this.physics.pause();
+        }
+        else{
+          this.add.text(camera.x, camera.y+400, "Don't leave your stuff.", {color: 'Black', font:'32px Arial', backgroundColor:'White'});
+        }
       }
     }
 
