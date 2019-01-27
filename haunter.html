@@ -42,10 +42,10 @@
     function preload ()
     {
         this.load.image('sky', 'haunter-godot/sky.png');
-        this.load.image('ground', 'haunter-godot/platform.png');
+        this.load.image('ground', 'Floor.png');
         this.load.image('star', 'haunter-godot/star.png');
         this.load.image('bomb', 'haunter-godot/bomb.png');
-        this.load.spritesheet('dude', 'haunter-godot/protag-side.png', { frameWidth: 67, frameHeight: 168});
+        this.load.spritesheet('dude', 'twowaycycle.png', { frameWidth: 66, frameHeight: 167});
         this.load.spritesheet('ghost', 'haunter-godot/antag-1.png', { frameWidth: 63, frameHeight: 169});
     }
 
@@ -61,7 +61,7 @@
         platforms.create(50, 250, 'ground');
         platforms.create(750, 220, 'ground');
 
-        player = this.physics.add.sprite( 167,168, 'dude');
+        player = this.physics.add.sprite( 67,168, 'dude');
 
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
@@ -75,13 +75,13 @@
 
         this.anims.create({
             key: 'turn',
-            frames: [ { key: 'dude', frame: 3 } ],
-            frameRate: 20
+            frames: [ { key: 'dude', frame: 2 } ],
+            frameRate: 10
         });
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 8, end: 0 }),
+            frames: this.anims.generateFrameNumbers('dude', { start: 9, end: 16 }),
             frameRate: 10,
             repeat: -1
         });
@@ -90,7 +90,7 @@
         //antagonist animations
         this.anims.create({
             key: 'antag-left',
-            frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 8 }),
+            frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 3 }),
             frameRate: 10,
             repeat: -1
         });
@@ -103,7 +103,7 @@
 
         this.anims.create({
             key: 'antag-right',
-            frames: this.anims.generateFrameNumbers('ghost', { start: 8, end: 0 }),
+            frames: this.anims.generateFrameNumbers('ghost', { start: 4, end: 6 }),
             frameRate: 10,
             repeat: -1
         });
