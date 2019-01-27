@@ -1,6 +1,6 @@
-<!doctype html> 
-<html lang="en"> 
-<head> 
+<!doctype html>
+<html lang="en">
+<head>
     <meta charset="UTF-8" />
     <title>Making your first Phaser 3 Game - Part 8</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
@@ -29,7 +29,8 @@
             preload: preload,
             create: create,
             update: update
-        }
+        },
+        backgroundColor: 0xFFFFFF
     };
 
     var player;
@@ -111,7 +112,7 @@
         });
 
 
-        
+
         cursors = this.input.keyboard.createCursorKeys();
 
         stars = this.physics.add.group({
