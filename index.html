@@ -58,8 +58,8 @@
 
         platforms = this.physics.add.staticGroup();
         platforms.create(0, 600, 'Floor').setScale(2,1).refreshBody();
-        platforms.create(300, 300, 'Floor').setScale(0.2,1).refreshBody();
-        platforms.create(600, 300, 'Floor').setScale(0.2,1).refreshBody();
+        platforms.create(300, 260 , 'Floor').setScale(0.4,1).refreshBody();
+        //platforms.create(600, 300, 'Floor').setScale(0.2,1).refreshBody();
         //platforms.create(90, 250, 'Floor').setScale(0.2,1).refreshBody();
         //platforms.create(500, 650, 'Floor').setScale(0.2,1).refreshBody();
         //platforms.create(750, 220, 'Floor').setScale(0.2,1).refreshBody();
@@ -117,6 +117,7 @@
         this.physics.add.collider(stars, platforms); // furnature collision here
 
         this.physics.add.overlap(player, stars, collectStar, null, this); //packs things
+        //this.physics.add.overlap(player, stars, collectStar, null, this); //packs things
     }
 
     function update ()
@@ -135,7 +136,7 @@
         
         }
         if (antag.x <= 60) { antag.direction = 'right'}
-        if (antag.x >= 1080) { antag.direction = 'left'}
+        if (antag.x >= 1000) { antag.direction = 'left'}
         
 
         if (cursors.left.isDown)
