@@ -42,18 +42,18 @@
 
     function preload ()
     {
-        this.load.image('sky', 'haunter-godot/sky.png');
-        this.load.image('Floor', 'Floor.png');
-        this.load.image('ground', 'floor_slice.png');
-        this.load.image('star', 'haunter-godot/star.png');
-        this.load.image('bomb', 'haunter-godot/bomb.png');
-        this.load.spritesheet('dude', 'twowaycycle.png', { frameWidth: 66, frameHeight: 167});
+        //this.load.image('sky', 'haunter-godot/sky.png');
+        this.load.image('Floor', 'haunter-godot/Floor.png');
+        //this.load.image('ground', 'haunter-godot/floor_slice.png');
+        //this.load.image('star', 'haunter-godot/star.png');
+        //this.load.image('bomb', 'haunter-godot/bomb.png');
+        this.load.spritesheet('dude', 'haunter-godot/twowaycycle.png', { frameWidth: 66, frameHeight: 167});
         this.load.spritesheet('ghost', 'haunter-godot/antag-1.png', { frameWidth: 63, frameHeight: 169});
     }
 
     function create ()
     {
-        this.add.image(400, 300, 'sky');
+        //this.add.image(400, 300, 'sky');
 
         platforms = this.physics.add.staticGroup();
 
