@@ -49,15 +49,19 @@
         //this.load.image('bomb', 'haunter-godot/bomb.png');
         this.load.spritesheet('dude', 'haunter-godot/twowaycycle.png', { frameWidth: 66, frameHeight: 167});
         this.load.spritesheet('ghost', 'haunter-godot/antag-1.png', { frameWidth: 63, frameHeight: 169});
+        this.load.image('DoorExit', 'haunter-godot/DoorExit.png');
     }
 
     function create ()
     {
         //this.add.image(400, 300, 'sky');
 
+        doorsExit = this.physics.add.staticGroup();
+        doorsExit.create(67,510, 'DoorExit');
+
         platforms = this.physics.add.staticGroup();
 
-        platforms.create(0, 600, 'Floor')
+        platforms.create(800, 600, 'Floor')
 
         platforms.create(600, 300, 'Floor').setScale(0.2,1).refreshBody();
         platforms.create(90, 250, 'Floor').setScale(0.2,1).refreshBody();
@@ -127,7 +131,8 @@
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(stars, platforms);
 
-        this.physics.add.overlap(player, stars, collectStar, null, this); //packs things
+        this.physics.add.overlap(player, stars, collectStar, null, this);
+        this.physics.add.overlap(player, doorsExit, win, null, this); //packs things
     }
 
     function update ()
@@ -157,9 +162,14 @@
         }
     }
 
+
     function collectStar (player, star)
     {
         star.disableBody(true, true);
+    }
+
+    function win(){
+        this.add.text(200,200, "Winners Live", {color: 'Black', font:'64px Arial', backgroundColor:'White'});
     }
 
 </script>
