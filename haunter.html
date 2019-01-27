@@ -42,7 +42,8 @@
     function preload ()
     {
         this.load.image('sky', 'haunter-godot/sky.png');
-        this.load.image('ground', 'Floor.png');
+        this.load.image('Floor', 'Floor.png');
+        this.load.image('ground', 'floor_slice.png');
         this.load.image('star', 'haunter-godot/star.png');
         this.load.image('bomb', 'haunter-godot/bomb.png');
         this.load.spritesheet('dude', 'twowaycycle.png', { frameWidth: 66, frameHeight: 167});
@@ -55,11 +56,12 @@
 
         platforms = this.physics.add.staticGroup();
 
-        platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+        platforms.create(0, 600, 'Floor')
 
-        platforms.create(600, 400, 'ground');
-        platforms.create(50, 250, 'ground');
-        platforms.create(750, 220, 'ground');
+        platforms.create(600, 300, 'Floor').setScale(0.2,1).refreshBody();
+        platforms.create(90, 250, 'Floor').setScale(0.2,1).refreshBody();
+        platforms.create(500, 650, 'Floor').setScale(0.2,1).refreshBody();
+        platforms.create(750, 220, 'Floor').setScale(0.2,1).refreshBody();
 
         player = this.physics.add.sprite( 67,168, 'dude');
 
