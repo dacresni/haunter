@@ -37,7 +37,8 @@
     var stars;
     var platforms;
     var cursors;
-    var currentFloorR=1;
+    var score=0;
+    var scoreToWin=5;
 
     var game = new Phaser.Game(config);
 
@@ -46,8 +47,8 @@
         this.load.image('upDoor', 'haunter-godot/DoorUp.png');
         this.load.image('dnDoor', 'haunter-godot/DoorDown.png');
         this.load.image('Floor', 'haunter-godot/Floor.png');
-        //this.load.image('star', 'haunter-godot/star.png');
-        //this.load.image('bomb', 'haunter-godot/bomb.png');
+        this.load.image('Wall', 'haunter-godot/Wall.png');
+        this.load.image('box', 'haunter-godot/box.png');
         this.load.spritesheet('dude', 'haunter-godot/twowaycycle.png', { frameWidth: 66, frameHeight: 167});
         this.load.spritesheet('ghost', 'haunter-godot/antag-1.png', { frameWidth: 65, frameHeight: 169});
         this.load.image('DoorExit', 'haunter-godot/DoorExit.png');
@@ -55,21 +56,27 @@
 
     function create ()
     {
-        this.add.image(190, 510, 'upDoor');
-        this.add.image(800, 510, 'upDoor');
-
         doorsExit = this.physics.add.staticGroup();
-        doorsExit.create(67,510, 'DoorExit');
+        doorsExit.create(990,960, 'DoorExit');
+
+        doorsDown = this.physics.add.staticGroup();
+        doorsDown.create(500, 260, 'dnDoor');
+        doorsDown.create(990, 260, 'dnDoor');
+        doorsDown.create(67, 610, 'dnDoor');
+
+        doorsUp = this.physics.add.staticGroup();
+        doorsUp.create(500,610, 'upDoor');
+        doorsUp.create(990,610, 'upDoor');
+        doorsUp.create(67,960, 'upDoor');
+
 
         platforms = this.physics.add.staticGroup();
-        platforms.create(0, 600, 'Floor').setScale(2,1).refreshBody();
-        platforms.create(300, 260 , 'Floor').setScale(0.4,1).refreshBody();
-        //platforms.create(600, 300, 'Floor').setScale(0.2,1).refreshBody();
-        //platforms.create(90, 250, 'Floor').setScale(0.2,1).refreshBody();
-        //platforms.create(500, 650, 'Floor').setScale(0.2,1).refreshBody();
-        //platforms.create(750, 220, 'Floor').setScale(0.2,1).refreshBody();
+        platforms.create(500, 350 , 'Floor');
+        platforms.create(500, 700, 'Floor');
+        platforms.create(500, 1050, 'Floor');
+        platforms.create(560, 175, 'Wall');
 
-        player = this.physics.add.sprite( 300,400, 'dude');
+        player = this.physics.add.sprite( 67,253, 'dude');
         player.setCollideWorldBounds(true);
 
         antag = this.physics.add.sprite( 900,168, 'ghost');
@@ -109,20 +116,27 @@
         cursors = this.input.keyboard.createCursorKeys();
 
         stars = this.physics.add.group({
-            key: 'star',
-            repeat: 7,
-            setXY: { x: 12, y: 0, stepX: 70 }
+            key: 'box',
+            repeat: 1,
+            setXY: { x: 140, y: 300, stepX: 500 }
         });
 
+        stars.create(1000,600,'box');
+        stars.create(200,600,'box');
+        stars.create(700,900,'box');
+
         stars.children.iterate(function (child) {
-            child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+            child.setBounceY(Phaser.Math.FloatBetween(0.1, 0.4));
         });
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(antag, platforms);
         this.physics.add.collider(stars, platforms); // furnature collision here
 
-        this.physics.add.overlap(player, stars, collectStar, null, this);
-        this.physics.add.overlap(player, doorsExit, win, null, this); //packs things
+        this.physics.add.overlap(player, stars, movingBox, null, this);// packs things
+
+        this.physics.add.overlap(player, doorsExit, win, null, this);
+        this.physics.add.overlap(player, doorsDown, down, null, this);
+        this.physics.add.overlap(player, doorsUp, up, null, this);
 
         //Camera
         camera =this.cameras.main;
@@ -175,14 +189,38 @@
     }
 
 
-    function collectStar (player, star)
+    function movingBox (player, star)
     {
         star.disableBody(true, true);
+        score=score+1;
     }
 
     function win(){
-        this.add.text(200,200, "Winners Live", {color: 'Black', font:'64px Arial', backgroundColor:'White'});
+      if (cursors.down.isDown){
+        if(score>=scoreToWin){
+          this.add.text(player.x-190, player.y-175, "You escape!", {color: 'Black', font:'64px Arial', backgroundColor:'White'});
+          this.add.text(650,1053,"By Nehemiah Dacres, Jason Charney, Daniel Nagel, and M.K. Jones", {color: 'Black'});
+          this.physics.pause();
+        }
+        else{
+          this.add.text(player.x-175, player.y-150, "Don't leave your stuff.", {color: 'Black', font:'32px Arial', backgroundColor:'White'});
+        }
+      }
     }
+
+      function down(){
+        if (cursors.down.isDown){
+          player.y=player.y+350;
+          cursors.down.reset();
+        }
+    }
+
+    function up(){
+      if (cursors.down.isDown){
+        player.y=player.y-350;
+        cursors.down.reset();
+      }
+  }
 
 </script>
 
